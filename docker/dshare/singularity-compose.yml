@@ -1,0 +1,10 @@
+version: "2.0"
+instances:
+  mysql:
+    image: "mysql.simg"
+    options:
+      - fakeroot
+  # spyglass:
+  #   image: "spyglass_tmp_latest.sif"
+  # python:
+  #   image: "python.simg"
