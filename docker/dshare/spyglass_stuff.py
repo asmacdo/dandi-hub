@@ -1,10 +1,9 @@
-(base) jovyan@2c5897350238:~$ cat script.py 
-import requests
-import sys
-print("Hello world")
-r = requests.get('http://example.com')
-
-sys.exit(1)
+# import requests
+# import sys
+# print("Hello world")
+# r = requests.get('http://example.com')
+#
+# sys.exit(1)
 
 
 import datajoint as dj
@@ -81,7 +80,7 @@ warnings.simplefilter('ignore', category=UserWarning)
 
 print("hello 1")
 
-from spyglass.common import Session, Nwbfile
+# from spyglass.common import Session, Nwbfile
 
 print("hello 2")
 #

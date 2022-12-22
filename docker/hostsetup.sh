@@ -1,3 +1,4 @@
-docker build -f Dockerfile -t hubby
+source ./clean.sh
+docker build -f Dockerfile . -t hubby
 
-docker run -it --rm --privileged -p 8888:8888 -v $PWD/dshare/:/home/jovyan/dshare/ hubby
+docker run --privileged -it --rm -p 8888:8888 -v $PWD/dshare/:/home/jovyan/dshare/ hubby

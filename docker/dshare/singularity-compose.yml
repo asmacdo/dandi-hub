@@ -4,7 +4,7 @@ instances:
     image: "mysql.simg"
     options:
       - fakeroot
-  # spyglass:
-  #   image: "spyglass_tmp_latest.sif"
+  spyglass:
+    image: "spyglass_tmp_latest.sif"
   # python:
   #   image: "python.simg"

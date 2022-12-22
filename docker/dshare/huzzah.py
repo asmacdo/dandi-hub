@@ -1,2 +1,5 @@
 import mysql.connector
-hhh = mysql.connector.connect(user="root", host="127.0.0.1")
+
+hhh = mysql.connector.connect(user="root", host="localhost")
+print("No error on sql connect")
+print(hhh)
