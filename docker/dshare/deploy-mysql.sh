@@ -9,7 +9,16 @@ export APPTAINERENV_MYSQL_PASSWORD=tutorial
 # export SINGULARITYENV_MYSQL_USER=jovyan
 # export SINGULARITYENV_MYSQL_PASSWORD=asdf
 export APPTAINERENV_MYSQL_ROOT_PASSWORD=tutorial
-singularity run -B /home/jovyan/dshare/mysql/:/var/lib/mysql/ -B /home/jovyan/dshare/run/:/var/run/mysqld/ -B /home/jovyan/dshare/config/:/etc/mysql/ -B /home/jovyan/dshare/mysql-files/:/var/lib/mysql-files/ mysql.simg
+export MY_HOME=/home/austin/dart/dandi-hub/docker/
+# export MY_HOME=/home/jovyan/
+
+
+
+singularity pull docker://datajoint/mysql:5.7
+singularity build mysql.simg docker://datajoint/mysql:5.7
+
+
+singularity run -B $MY_HOME/dshare/mysql/:/var/lib/mysql/ -B $MY_HOME/dshare/run/:/var/run/mysqld/ -B $MY_HOME/dshare/config/:/etc/mysql/ -B $MY_HOME/dshare/mysql-files/:/var/lib/mysql-files/ mysql.simg
   # -B /home/jovian/dshare/usharemysql/:/usr/share/mysql/ \
   # -B /home/jovyan/dshare/tmp/:/var/tmp/ \
 

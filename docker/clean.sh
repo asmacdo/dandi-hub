@@ -6,4 +6,5 @@ rm -rf dshare/mysql.socket*
 rm -rf dshare/mysql/*
 rm -rf dshare/binlog*
 rm -rf dshare/mysql-files/*
-
+rm -rf dshare/*.simg
+rm -rf dshare/*.sif
