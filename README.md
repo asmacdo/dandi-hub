@@ -200,8 +200,44 @@ The variables are set in a `terraform.tfvars` for each `env`, ie `envs/dandi/ter
 - `dandi_api_domain`: The domain that hosts the DANDI API with list of registered users
 - `admin_users`: List of admin GitHub usernames (ie: ["github_username"])
 - `region`: Cloud vendor region (ie us-west-1)
+- `github_organization`: If using github rather than DANDI auth
+- `auth_type`: "github" or "dandi_api"
+- `profile_list_path`: relative path to the profile list yaml file, see below
 
 WARNING: If changing `region` it must be changed both in the tfvars and in the `backend.tf`.
+
+### Profiles File
+
+Create a profiles file and name it to match `profile_list_path`.
+
+These are the Jupyterhub options for user-facing machines that run as a pod on the node.
+https://z2jh.jupyter.org/en/stable/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment
+
+Each profile can have multiple user-facing `profile_options` including `images`.
+
+Example:
+
+```yaml
+- display_name: "Tiny. Useful for many quick things"
+  description: "0.5 CPU / 1 GB"
+  profile_options:
+    image:
+      display_name: "Image"
+      choices:
+        standard:
+          display_name: "Standard"
+          default: true
+          kubespawner_override:
+            image: "${singleuser_image_repo}:${singleuser_image_tag}"
+  kubespawner_override:
+    image_pull_policy: Always
+    cpu_limit: 2
+    cpu_guarantee: 0.25
+    mem_limit: 2G
+    mem_guarantee: 0.5G
+    node_selector:
+      NodePool: default
+```
 
 ## Github OAuth
 
@@ -235,7 +271,6 @@ Mark the existing KMS for deletion.
 ### Connect Jupyterhub proxy to DNS
 
 **Route the Domain in Route 53**
-
 In Route 53 -> Hosted Zones -> <jupyterhub_domain> create an `A` type Record that routes to an
 `Alias to Network Load Balancer`. Set the region and the EXTERNAL_IP of the `service/proxy-public`
 Kubernetes object in the `jupyterhub` namespace.
@@ -296,7 +331,7 @@ These are the EKS machines that may run underneath one or more user-hub pods, an
 
 The node pools are configured in `addons.tf` with `karpenter-resources-*` objects.
 
-## Adjusting Core Node
+## Adjusting Core Nodes
 
 The configuration for the machines that run the autoscaling and monitoring layer is `eks_managed_node_groups` in `main.tf`.
 

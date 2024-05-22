@@ -111,3 +111,14 @@ variable "profile_list_path" {
   description = "Path to the profile list file"
   type = string
 }
+
+variable "github_organization" {
+  description = "Github organization to check for user membership"
+  type = string
+}
+
+variable "auth_type" {
+  description = "Whether to query a DANDI API for authorization"
+  type = string
+  default = "dandi_api"
+}

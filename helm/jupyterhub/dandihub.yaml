@@ -22,6 +22,8 @@ hub:
         - read:user
         - read:gist
         - user:email
+      allowed_organizations:
+        - "${github_organization}"
 
 cull:
   enabled: true

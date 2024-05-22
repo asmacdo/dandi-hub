@@ -74,5 +74,9 @@ class IsDandiUserAuthenticator(GitHubOAuthenticator):
 
 
 c.KubeSpawner.modify_pod_hook = modify_pod_hook  # noqa
-c.JupyterHub.authenticator_class = IsDandiUserAuthenticator  # noqa
+if "${auth_type}" == "dandi_api":
+    c.JupyterHub.authenticator_class = IsDandiUserAuthenticator  # noqa
+elif "${auth_type}" == "github":
+    c.JupyterHub.authenticator_class = GitHubOAuthenticator  # noqa
+
 c.GitHubOAuthenticator.enable_auth_state = True  # noqa
