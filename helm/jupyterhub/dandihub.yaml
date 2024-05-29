@@ -19,7 +19,7 @@ hub:
       client_secret: "${client_secret}"
       oauth_callback_url: "https://${jupyterhub_domain}/hub/oauth_callback"
       scope:
-        - read:user
+        - read:org
         - read:gist
         - user:email
       allowed_organizations:
